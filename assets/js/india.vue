@@ -11,7 +11,6 @@
  */
 
 <template>
-  <div class="svg-container">
     <svg
       id="india"
       :width="svgWidth"
@@ -19,7 +18,6 @@
       :viewBox="`{0 0 ${svgWidth} ${svgHeight}}`"
       preserveAspectRatio="xMidYMid meet"
     />
-  </div>
 </template>
 
 <script>
@@ -27,18 +25,16 @@ module.exports = {
   name: "india",
   data() {
     return {
-      svgWidth: window.innerWidth <= 750 ? 600 : 800,
-      svgHeight: window.innerWidth <= 750 ? 550 : 750
+      svgWidth: window.innerWidth <= 750 ? 600 : 615,
+      svgHeight: window.innerWidth <= 750 ? 550 : 700
     };
   },
   mounted() {
-    console.log("svgHeight:", this.svgHeight);
+    
     var svg = d3.select("#india");
 
     const width = +svg.attr("width");
     const height = +svg.attr("height");
-
-    console.log(width, height);
 
     const promises = [d3.json("assets/india.json")];
 
@@ -58,7 +54,7 @@ module.exports = {
 
         projection = d3
           .geoMercator()
-          .center([78.9, 25])
+          .center([83, 23.5])
           .scale(1200)
           .translate([width / 2, height / 2]);
       }
@@ -66,7 +62,6 @@ module.exports = {
       var path = d3.geoPath(projection);
 
       var states = topojson.feature(india, india.objects.india);
-      console.log(states);
 
       svg
         .append("g")
@@ -114,7 +109,6 @@ module.exports = {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100%;
 }
 svg {
   align-self: center;
