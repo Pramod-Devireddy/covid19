@@ -1,0 +1,62 @@
+<!--
+File         : index.html
+Project      : COVID-19
+Created Date : Monday, Mar 23rd 2020, 10:03:26 PM
+Author       : Pramod Devireddy
+
+Last Modified: Wednesday, Mar 25th 2020, 10:33:16 PM
+Modified By  : Pramod Devireddy
+
+Copyright (c)2020 - Pramod Devireddy
+-->
+
+
+<!DOCTYPE html>
+<html style="overflow: auto">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <title>COVID-19</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+</head>
+
+<body>
+    <div id="app">
+        <v-app app>
+            <v-app-bar flat padless app style="background-color: transparent !important;">
+                <v-spacer></v-spacer>
+                <v-toolbar-title color="transparent" style="background-color: transparent;">
+                    <div class="pd_title" style="background-color: transparent;">COVID-19&nbsp;</div>
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+            </v-app-bar>
+
+            <v-content>
+                <div class="d-flex justify-center">
+                    <india></india>
+                </div>
+            </v-content>
+
+            <v-footer app padless style="padding: 10px 0; background-color: transparent;">
+                <div class="pd_footer d-flex justify-center">
+                    &copy; 2020 PRAMOD DEVIREDDY
+                </div>
+            </v-footer>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
