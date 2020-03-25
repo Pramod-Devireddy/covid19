@@ -46,7 +46,7 @@ module.exports = {
 
         projection = d3
           .geoMercator()
-          .center([93, 19])
+          .center([93.5, 25])
           .scale(650)
           .translate([width / 2, height / 2]);
 
