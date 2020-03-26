@@ -16,7 +16,7 @@
 - Heroku App: https://covid-19ind.herokuapp.com/
 - Github Pages: https://pramod-devireddy.github.io/covid19/
 
-- Data Source: https://api.covid19india.org/
-- Update Interval: 1 minute
+Data Source: https://api.covid19india.org/
+Update Interval: 1 minute
 
 Made with <img src="https://vuejs.org/images/logo.png" alt="drawing" width="15"/> and ❤️
