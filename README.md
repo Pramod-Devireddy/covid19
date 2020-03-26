@@ -1,8 +1,20 @@
 # COVID19
-Dashboard for COVID-19 Real-Time Statistics
+
+Dashboard for India's COVID-19 Real-Time Statistics
 
 ### Keep Tracking 🧐 & Fight with Corona 👊👊👊
-https://pramod-devireddy.github.io/covid19/
+
+## Features
+
+- Click on any state on the map to get The State's Real Time Stats
+- Click on the virus to repulse them away. Protect India from the virus 😜
+
+\*_Best Viewed in Desktops_
+
+## App Deploys
+
+- Heroku App: https://covid-19ind.herokuapp.com/
+- Github Pages: https://pramod-devireddy.github.io/covid19/
 
 - Data Source: https://api.covid19india.org/
 - Update Interval: 1 minute
