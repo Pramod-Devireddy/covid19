@@ -10,7 +10,6 @@
  * Copyright (c)2020 - Pramod Devireddy
  */
 
-
 @font-face {
   font-family: "IMACS-Bots";
   src: url("../fonts/IMACS-Bots.ttf");
@@ -48,8 +47,6 @@ html,
 .pd_footer {
   font-size: 14px;
   font-family: "Roboto";
-  letter-spacing: 1px;
-  font-style: italic;
   font-weight: bold;
   margin-left: 1%;
   margin-right: 1%;
@@ -62,4 +59,26 @@ html,
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.mobileFirst {
+  position: relative;
+  width: 615px;
+  height: 700px;
+  margin: auto;
+  margin-top: 60px;
+}
+
+@media screen and (max-width: 700px) {
+  .mobileFirst {
+    position: relative !important;
+    width: 350px;
+    height: 400px;
+    margin: auto;
+    margin-top: 40px;
+  }
+
+  .itemText {
+    font-size: 0.5rem;
+  }
 }

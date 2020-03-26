@@ -11,6 +11,31 @@
  */
 
 <template>
+  <div style="margin: 0">
+    <p>
+      <span class="tiny itemText" style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; margin-bottom: 15px;">All INDIA CASES</span>
+      <br />
+      <span class="itemText" style="background-color: #AD6613; border-radius: 3px; padding: 5px;">
+        ACTIVE:&nbsp;
+        <span class="itemText" style="font-weight: bold;">{{totalActive}}</span>
+        <span class="itemText">[+{{totalDeltaActive}}]</span>
+        <span class="tiny itemText">/{{totalConfirmed}}</span>
+      </span>
+
+      <span class="itemText" style="background-color: #9C2929; border-radius: 3px; padding: 5px;">
+        DEATHS:&nbsp;
+        <span class="itemText" style="font-weight: bold;">{{totalDeaths}}</span>
+        <span class="itemText">[+{{totalDeltaDeaths}}]</span>
+        <span class="tiny itemText">({{mortalityRate}})</span>
+      </span>
+
+      <span class="itemText" style="background-color: #197A12; border-radius: 3px; padding: 5px;">
+        RECOVERIES:&nbsp;
+        <span class="itemText" style="font-weight: bold;">{{totalRecovered}}</span>
+        <span class="itemText">[+{{totalDeltaRecovered}}]</span>
+        <span class="tiny itemText">({{recoveryRate}})</span>
+      </span>
+    </p>
     <svg
       id="india"
       :width="svgWidth"
@@ -18,6 +43,29 @@
       :viewBox="`{0 0 ${svgWidth} ${svgHeight}}`"
       preserveAspectRatio="xMidYMid meet"
     />
+    <p>
+      <span class="tiny itemText" style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; text-transform: uppercase;">{{selectedState}} Cases</span>
+      <br />
+      <span class="itemText" style="background-color: #AD6613; border-radius: 3px; padding: 5px;">
+      ACTIVE:&nbsp;
+      <span class="itemText" style="font-weight: bold;">{{selStateActive}}</span>
+      <span class="itemText">[+{{selStateDeltaActive}}]</span>
+      <span class="tiny itemText">/{{selStateConfirmed}}</span>
+      </span>
+      <span class="itemText" style="background-color: #9C2929; border-radius: 3px; padding: 5px;">
+        DEATHS:&nbsp;
+      <span class="itemText" style="font-weight: bold;">{{selStateDeaths}}</span>
+      <span class="itemText">[+{{selStateDeltaDeaths}}]</span>
+      <span class="tiny itemText">({{selStateMortalityRate}})</span>
+      </span>
+      <span class="itemText" style="background-color: #197A12; border-radius: 3px; padding: 5px;">
+        RECOVERIES:&nbsp;
+      <span class="itemText" style="font-weight: bold;">{{selStateRecovered}}</span>
+      <span class="itemText">[+{{selStateDeltaRecovered}}]</span>
+      <span class="tiny itemText">({{selStateRecoveryRate}})</span>
+      </span>
+    </p>
+  </div>
 </template>
 
 <script>
@@ -25,12 +73,40 @@ module.exports = {
   name: "india",
   data() {
     return {
-      svgWidth: window.innerWidth <= 750 ? 600 : 615,
-      svgHeight: window.innerWidth <= 750 ? 550 : 700
+      totalData: [],
+
+      totalActive: "",
+      totalDeltaActive: "",
+      totalConfirmed: "",
+
+      totalDeaths: "",
+      totalDeltaDeaths: "",
+      mortalityRate: "",
+
+      totalRecovered: "",
+      totalDeltaRecovered: "",
+      recoveryRate: "",
+
+      selectedState: "Andhra Pradesh",
+
+      selStateActive: "",
+      selStateDeltaActive: "",
+      selStateConfirmed: "",
+
+      selStateDeaths: "",
+      selStateDeltaDeaths: "",
+      selStateMortalityRate: "",
+
+      selStateRecovered: "",
+      selStateDeltaRecovered: "",
+      selStateRecoveryRate: "",
+
+      svgWidth: window.innerWidth <= 750 ? 330 : 615,
+      svgHeight: window.innerWidth <= 750 ? 400 : 700
     };
   },
   mounted() {
-    
+    var vm = this;
     var svg = d3.select("#india");
 
     const width = +svg.attr("width");
@@ -41,17 +117,14 @@ module.exports = {
     Promise.all(promises).then(ready);
 
     function ready([india]) {
-        var projection
+      var projection;
       if (window.innerWidth < 700) {
-
         projection = d3
           .geoMercator()
-          .center([93.5, 25])
+          .center([83, 24])
           .scale(650)
           .translate([width / 2, height / 2]);
-
       } else {
-
         projection = d3
           .geoMercator()
           .center([83, 23.5])
@@ -66,7 +139,7 @@ module.exports = {
       svg
         .append("g")
         .attr("class", "states")
-        .attr("stroke", "#ff073a2a")
+        .attr("stroke", "#ff073a5a")
         .selectAll("path")
         .data(topojson.feature(india, india.objects.india).features)
         .enter()
@@ -75,10 +148,13 @@ module.exports = {
         .attr("pointer-events", "all")
         .on("mouseenter", d => {
           const target = d3.event.target;
-          d3.select(target.parentNode.appendChild(target))
-            .attr("fill", "#111")
+          console.log(target)
+          d3.select(target)
+            .attr("fill", "#181818")
             .attr("stroke", "#ff073a")
             .attr("stroke-width", 2);
+          vm.selectedState = d.properties.ST_NM;
+          vm.updateStateData();
         })
         .on("mouseleave", d => {
           const target = d3.event.target;
@@ -99,18 +175,86 @@ module.exports = {
         .attr("stroke-width", 2)
         .attr("d", path(topojson.mesh(india, india.objects.india)));
     }
+
+    this.updateTotalData();
+    setInterval(this.updateTotalData, 60000); //Real-Time Stats
   },
-  methods: {}
+  methods: {
+    updateTotalData: function() {
+      var vm = this;
+      axios
+        .get("https://api.covid19india.org/data.json")
+        .then(function(response) {
+          vm.totalData = response.data;
+          console.log("came here");
+          for (var i = 0; i < vm.totalData.statewise.length; i++) {
+            if (vm.totalData.statewise[i].state == "Total") {
+              vm.totalActive = vm.totalData.statewise[i].active;
+              vm.totalDeltaActive = vm.totalData.statewise[i].delta.active;
+              vm.totalConfirmed = vm.totalData.statewise[i].confirmed;
+
+              vm.totalDeaths = vm.totalData.statewise[i].deaths;
+              vm.totalDeltaDeaths = vm.totalData.statewise[i].delta.deaths;
+              vm.mortalityRate =
+                ((vm.totalDeaths / vm.totalConfirmed) * 100).toFixed(2) + "%";
+
+              vm.totalRecovered = vm.totalData.statewise[i].recovered;
+              vm.totalDeltaRecovered =
+                vm.totalData.statewise[i].delta.recovered;
+              vm.recoveryRate =
+                ((vm.totalRecovered / vm.totalConfirmed) * 100).toFixed(2) +
+                "%";
+
+              break;
+            }
+          }
+
+          vm.updateStateData();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
+    updateStateData: function() {
+      var vm = this;
+      for (var i = 0; i < vm.totalData.statewise.length; i++) {
+        if (vm.totalData.statewise[i].state == vm.selectedState) {
+          vm.selStateActive = vm.totalData.statewise[i].active;
+          vm.selStateDeltaActive = vm.totalData.statewise[i].delta.active;
+          vm.selStateConfirmed = vm.totalData.statewise[i].confirmed;
+
+          vm.selStateDeaths = vm.totalData.statewise[i].deaths;
+          vm.selStateDeltaDeaths = vm.totalData.statewise[i].delta.deaths;
+          vm.selStateMortalityRate =
+            ((vm.selStateDeaths / vm.selStateConfirmed) * 100).toFixed(2) + "%";
+
+          vm.selStateRecovered = vm.totalData.statewise[i].recovered;
+          vm.selStateDeltaRecovered = vm.totalData.statewise[i].delta.recovered;
+          vm.selStateRecoveryRate =
+            ((vm.selStateRecovered / vm.selStateConfirmed) * 100).toFixed(2) +
+            "%";
+
+          break;
+        }
+      }
+    }
+  }
 };
 </script>
 
 <style scoped>
-.svg-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+p {
+  margin: 0;
+  color: aliceblue;
+  font-size: 0.9rem;
 }
 svg {
   align-self: center;
 }
+
+.tiny {
+  color: rgba(240, 255, 255, 0.692);
+}
+
 </style>
