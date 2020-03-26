@@ -8,7 +8,7 @@ https://covid-19ind.herokuapp.com/
 
 ## Features
 
-- Click on any state on the map to get The State's Real Time Stats
+- Click on any state on the map to get the State's Real-Time Stats
 - Click on the virus to repulse them away. Protect India from the virus 😜
 - Update Interval: 1 minute
 - Data Source: https://api.covid19india.org/
