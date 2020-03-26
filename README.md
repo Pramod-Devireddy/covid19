@@ -1,6 +1,6 @@
 # COVID19
 
-Dashboard for India's COVID-19 Real-Time Statistics
+[Dashboard](https://covid-19ind.herokuapp.com/) for India's COVID-19 Real-Time Statistics
 
 ### Keep Tracking 🧐 & Fight with Corona 👊👊👊
 
