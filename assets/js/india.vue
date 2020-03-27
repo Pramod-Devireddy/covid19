@@ -148,7 +148,6 @@ module.exports = {
         .attr("pointer-events", "all")
         .on("mouseenter", d => {
           const target = d3.event.target;
-          console.log(target)
           d3.select(target)
             .attr("fill", "#181818")
             .attr("stroke", "#ff073a")
@@ -186,7 +185,7 @@ module.exports = {
         .get("https://api.covid19india.org/data.json")
         .then(function(response) {
           vm.totalData = response.data;
-          console.log("came here");
+          
           for (var i = 0; i < vm.totalData.statewise.length; i++) {
             if (vm.totalData.statewise[i].state == "Total") {
               vm.totalActive = vm.totalData.statewise[i].active;
