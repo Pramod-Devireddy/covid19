@@ -28,6 +28,8 @@ new Vue({
     // this.updateHits();
 
     // setInterval(this.updateHits, 10000);
+
+    // setTimeout(this.updateTempHits(), 30000);
   },
   methods: {
     updateHits: function() {
@@ -40,7 +42,7 @@ new Vue({
       var query2 = "?url=" + encodeURIComponent(app2);
 
       axios
-        .get("https://hitcounter.pythonanywhere.com/nocount"+ query1)
+        .get("https://hitcounter.pythonanywhere.com/nocount" + query1)
         .then(function(response) {
           vm.app1Hits = response.data;
 
@@ -58,6 +60,10 @@ new Vue({
         .catch(function(error) {
           console.log(error);
         });
+    },
+
+    updateTempHits: function() {
+      window.location.reload(true);
     }
   }
 });
