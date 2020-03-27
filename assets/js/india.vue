@@ -12,7 +12,7 @@
 
 <template>
   <div style="margin: 0 auto">
-    <p>
+    <p style="margin-bottom: 15px;">
       <span
         class="tiny itemText"
         style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; margin-bottom: 15px;"
@@ -40,7 +40,7 @@
       </span>
     </p>
     <svg id="india" />
-    <p style="margin-bottom: 50px;">
+    <p>
       <span
         class="tiny itemText"
         style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; text-transform: uppercase;"
@@ -265,7 +265,6 @@ p {
   margin: 0;
   color: aliceblue;
   font-size: 0.9rem;
-  margin-bottom: 15px;
 }
 
 .tiny {
