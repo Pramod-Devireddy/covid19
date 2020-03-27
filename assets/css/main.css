@@ -63,8 +63,8 @@ html,
 
 .mobileFirst {
   position: relative;
-  width: 615px;
-  height: 700px;
+  /* width: 615px;
+  height: 700px; */
   margin: auto;
   margin-top: 60px;
 }
@@ -78,14 +78,14 @@ html,
 @media screen and (max-width: 700px) {
   .mobileFirst {
     position: relative !important;
-    width: 350px;
-    height: 400px;
+    /* width: 350px;
+    height: 400px; */
     margin: auto;
-    margin-top: 40px;
+    margin-top: 50px;
   }
 
   .itemText {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
   }
 
   .pd_footer {

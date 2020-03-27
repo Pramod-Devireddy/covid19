@@ -11,58 +11,58 @@
  */
 
 <template>
-  <div style="margin: 0">
+  <div style="margin: 0 auto">
     <p>
-      <span class="tiny itemText" style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; margin-bottom: 15px;">All INDIA CASES</span>
+      <span
+        class="tiny itemText"
+        style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; margin-bottom: 15px;"
+      >All INDIA CASES</span>
       <br />
       <span class="itemText" style="background-color: #AD6613; border-radius: 3px; padding: 5px;">
         ACTIVE:&nbsp;
         <span class="itemText" style="font-weight: bold;">{{totalActive}}</span>
-        <span class="itemText">[+{{totalDeltaActive}}]</span>
+        <span class="itemText">[&#8593;{{totalDeltaActive}}]</span>
         <span class="tiny itemText">/{{totalConfirmed}}</span>
       </span>
 
       <span class="itemText" style="background-color: #9C2929; border-radius: 3px; padding: 5px;">
         DEATHS:&nbsp;
         <span class="itemText" style="font-weight: bold;">{{totalDeaths}}</span>
-        <span class="itemText">[+{{totalDeltaDeaths}}]</span>
-        <span class="tiny itemText">({{mortalityRate}})</span>
+        <span class="itemText">[&#8593;{{totalDeltaDeaths}}]</span>
+        <!-- <span class="tiny itemText">({{mortalityRate}})</span> -->
       </span>
 
       <span class="itemText" style="background-color: #197A12; border-radius: 3px; padding: 5px;">
         RECOVERIES:&nbsp;
         <span class="itemText" style="font-weight: bold;">{{totalRecovered}}</span>
-        <span class="itemText">[+{{totalDeltaRecovered}}]</span>
-        <span class="tiny itemText">({{recoveryRate}})</span>
+        <span class="itemText">[&#8593;{{totalDeltaRecovered}}]</span>
+        <!-- <span class="tiny itemText">({{recoveryRate}})</span> -->
       </span>
     </p>
-    <svg
-      id="india"
-      :width="svgWidth"
-      :height="svgHeight"
-      :viewBox="`{0 0 ${svgWidth} ${svgHeight}}`"
-      preserveAspectRatio="xMidYMid meet"
-    />
-    <p>
-      <span class="tiny itemText" style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; text-transform: uppercase;">{{selectedState}} Cases</span>
+    <svg id="india" />
+    <p style="margin-bottom: 50px;">
+      <span
+        class="tiny itemText"
+        style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; text-transform: uppercase;"
+      >{{selectedState}} Cases</span>
       <br />
       <span class="itemText" style="background-color: #AD6613; border-radius: 3px; padding: 5px;">
-      ACTIVE:&nbsp;
-      <span class="itemText" style="font-weight: bold;">{{selStateActive}}</span>
-      <span class="itemText">[+{{selStateDeltaActive}}]</span>
-      <span class="tiny itemText">/{{selStateConfirmed}}</span>
+        ACTIVE:&nbsp;
+        <span class="itemText" style="font-weight: bold;">{{selStateActive}}</span>
+        <span class="itemText">[&#8593;{{selStateDeltaActive}}]</span>
+        <span class="tiny itemText">/{{selStateConfirmed}}</span>
       </span>
       <span class="itemText" style="background-color: #9C2929; border-radius: 3px; padding: 5px;">
         DEATHS:&nbsp;
-      <span class="itemText" style="font-weight: bold;">{{selStateDeaths}}</span>
-      <span class="itemText">[+{{selStateDeltaDeaths}}]</span>
-      <span class="tiny itemText">({{selStateMortalityRate}})</span>
+        <span class="itemText" style="font-weight: bold;">{{selStateDeaths}}</span>
+        <span class="itemText">[&#8593;{{selStateDeltaDeaths}}]</span>
+        <!-- <span class="tiny itemText">({{selStateMortalityRate}})</span> -->
       </span>
       <span class="itemText" style="background-color: #197A12; border-radius: 3px; padding: 5px;">
         RECOVERIES:&nbsp;
-      <span class="itemText" style="font-weight: bold;">{{selStateRecovered}}</span>
-      <span class="itemText">[+{{selStateDeltaRecovered}}]</span>
-      <span class="tiny itemText">({{selStateRecoveryRate}})</span>
+        <span class="itemText" style="font-weight: bold;">{{selStateRecovered}}</span>
+        <span class="itemText">[&#8593;{{selStateDeltaRecovered}}]</span>
+        <!-- <span class="tiny itemText">({{selStateRecoveryRate}})</span> -->
       </span>
     </p>
   </div>
@@ -99,93 +99,111 @@ module.exports = {
 
       selStateRecovered: "",
       selStateDeltaRecovered: "",
-      selStateRecoveryRate: "",
-
-      svgWidth: window.innerWidth <= 750 ? 330 : 615,
-      svgHeight: window.innerWidth <= 750 ? 400 : 700
+      selStateRecoveryRate: ""
     };
   },
   mounted() {
-    var vm = this;
-    var svg = d3.select("#india");
-
-    const width = +svg.attr("width");
-    const height = +svg.attr("height");
-
-    const promises = [d3.json("assets/india.json")];
-
-    Promise.all(promises).then(ready);
-
-    function ready([india]) {
-      var projection;
-      if (window.innerWidth < 700) {
-        projection = d3
-          .geoMercator()
-          .center([83, 24])
-          .scale(650)
-          .translate([width / 2, height / 2]);
-      } else {
-        projection = d3
-          .geoMercator()
-          .center([83, 23.5])
-          .scale(1200)
-          .translate([width / 2, height / 2]);
-      }
-
-      var path = d3.geoPath(projection);
-
-      var states = topojson.feature(india, india.objects.india);
-
-      svg
-        .append("g")
-        .attr("class", "states")
-        .attr("stroke", "#ff073a5a")
-        .selectAll("path")
-        .data(topojson.feature(india, india.objects.india).features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        .attr("pointer-events", "all")
-        .on("mouseenter", d => {
-          const target = d3.event.target;
-          d3.select(target)
-            .attr("fill", "#181818")
-            .attr("stroke", "#ff073a")
-            .attr("stroke-width", 2);
-          vm.selectedState = d.properties.ST_NM;
-          vm.updateStateData();
-        })
-        .on("mouseleave", d => {
-          const target = d3.event.target;
-          d3.select(target)
-            .attr("fill", "#000")
-            .attr("stroke", "#ff073a2a");
-        })
-        .style("cursor", "pointer")
-        .append("title")
-        .text(function(d) {
-          return d.properties.ST_NM;
-        });
-
-      svg
-        .append("path")
-        .attr("stroke", "#ff073a2a")
-        .attr("fill", "none")
-        .attr("stroke-width", 2)
-        .attr("d", path(topojson.mesh(india, india.objects.india)));
-    }
-
+    this.renderIndiaMap();
     this.updateTotalData();
     setInterval(this.updateTotalData, 60000); //Real-Time Stats
+    window.addEventListener("resize", this.renderIndiaMap);
   },
   methods: {
+    renderIndiaMap: function() {
+      var vm = this;
+
+      var initWidth = window.innerWidth - 20;
+      var initHeight = window.innerHeight - 20;
+
+      if (initWidth > initHeight) {
+        initWidth = initHeight - 210; // Trial & Error
+      }
+
+      var svg = d3
+        .select("#india")
+        .attr("width", initWidth)
+        .attr("height", initHeight);
+
+      const promises = [d3.json("assets/india.json")];
+
+      Promise.all(promises).then(ready);
+
+      function ready([india]) {
+        var states = topojson.feature(india, india.objects.india);
+
+        var projection = d3
+          .geoIdentity()
+          .reflectY(true)
+          .fitSize([initWidth, initHeight], states);
+
+        var path = d3.geoPath(projection);
+
+        d3.select("#states").remove();
+        svg
+          .append("g")
+          .attr("id", "states")
+          .selectAll("path")
+          .data(states.features)
+          .enter()
+          .append("path")
+          .attr("d", path);
+
+        var width = document.getElementById("states").getBBox().width;
+        var height = document.getElementById("states").getBBox().height;
+
+        svg.attr("width", width);
+        svg.attr("height", height);
+
+        projection = d3
+          .geoIdentity()
+          .reflectY(true)
+          .fitSize([width, height], states);
+
+        path = d3.geoPath(projection);
+
+        d3.select("#states").remove();
+        svg
+          .append("g")
+          .attr("id", "states")
+          .attr("stroke", "#ff073a5a")
+          .attr("stroke-width", 1.5)
+          .selectAll("path")
+          .data(states.features)
+          .enter()
+          .append("path")
+          .attr("d", path)
+          .attr("pointer-events", "all")
+          .on("mouseenter", d => {
+            const target = d3.event.target;
+            d3.select(target)
+              .attr("fill", "#181818")
+              .attr("stroke", "#ff073a")
+              .attr("stroke-width", 2);
+            vm.selectedState = d.properties.ST_NM;
+            vm.updateStateData();
+          })
+          .on("mouseleave", d => {
+            const target = d3.event.target;
+            d3.select(target)
+              .attr("fill", "#000")
+              .attr("stroke", "#ff073a5a")
+              .attr("stroke-width", 1.5);
+          })
+          .style("cursor", "pointer")
+          .append("title")
+          .text(function(d) {
+            return d.properties.ST_NM;
+          });
+      }
+    },
+
     updateTotalData: function() {
       var vm = this;
       axios
         .get("https://api.covid19india.org/data.json")
         .then(function(response) {
           vm.totalData = response.data;
-          
+
           for (var i = 0; i < vm.totalData.statewise.length; i++) {
             if (vm.totalData.statewise[i].state == "Total") {
               vm.totalActive = vm.totalData.statewise[i].active;
@@ -247,13 +265,10 @@ p {
   margin: 0;
   color: aliceblue;
   font-size: 0.9rem;
-}
-svg {
-  align-self: center;
+  margin-bottom: 15px;
 }
 
 .tiny {
   color: rgba(240, 255, 255, 0.692);
 }
-
 </style>
