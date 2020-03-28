@@ -29,7 +29,6 @@ module.exports = {
         navigator.geolocation.getCurrentPosition(
           this.currentPosition,
           function() {
-            vm.distance = "";
             alert("Please Enable Location Services(GPS)");
           }
         );
