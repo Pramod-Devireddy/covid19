@@ -21,8 +21,9 @@ module.exports = {
   },
   mounted() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.currentPosition);
-      navigator.geolocation.watchPosition(this.currentPosition);
+      navigator.geolocation.watchPosition(this.currentPosition, function() {
+          alert("Please Enable Location Services(GPS)")
+      });
     } else {
       console.log("Geo-Location is not supported by your browser");
     }
