@@ -194,6 +194,13 @@ module.exports = {
           .text(function(d) {
             return d.properties.ST_NM;
           });
+
+        svg
+          .append("path")
+          .attr("stroke", "#ff073a5a")
+          .attr("fill", "none")
+          .attr("stroke-width", 1.5)
+          .attr("d", path(topojson.mesh(india, india.objects.india)));
       }
     },
 
