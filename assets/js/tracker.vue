@@ -15,11 +15,13 @@ module.exports = {
     return {
       latitude: 0,
       longitude: 0,
-      distance: 0
+      distance: 0,
+      isGPSOn: false
     };
   },
   mounted() {
     if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.currentPosition);
       navigator.geolocation.watchPosition(this.currentPosition);
     } else {
       console.log("Geo-Location is not supported by your browser");

@@ -8,7 +8,7 @@ https://covid19livetrack.herokuapp.com
 
 ## Features
 
-- Real-Time Stats & Tracks Distance from COVID-19 Confirmed Cases
+- Real-Time Stats & Tracks Distance from Nearest COVID-19 Confirmed Case
 - Click on any state on the map to get the State's Real-Time Stats
 - Click on the virus to repulse them away. Protect India from the virus 😜
 - Update Interval: 1 minute
