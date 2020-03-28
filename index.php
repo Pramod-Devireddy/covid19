@@ -29,7 +29,7 @@ Copyright (c)2020 - Pramod Devireddy
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="icon" href="assets/images/corona.svg" />
-    <title>COVID-19</title>
+    <title>COVID-19 Live Tracker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimal-ui" />
 </head>
 
@@ -39,7 +39,7 @@ Copyright (c)2020 - Pramod Devireddy
             <v-app-bar flat padless app style="background-color: transparent !important;">
                 <v-spacer></v-spacer>
                 <v-toolbar-title color="transparent" style="background-color: transparent;">
-                    <div class="pd_title" style="background-color: transparent;">COVID-19&nbsp;</div>
+                    <div class="pd_title" style="background-color: transparent;">COVID-19 Live Tracker</div>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
             </v-app-bar>
