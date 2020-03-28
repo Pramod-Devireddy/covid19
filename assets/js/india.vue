@@ -40,7 +40,7 @@
       </span>
     </p>
     <svg id="india" />
-    <p>
+    <p style="margin-top: -15px;">
       <span
         class="tiny itemText"
         style="font-weight: bold; background-color: #110101; border-radius: 3px; padding: 5px; text-transform: uppercase;"
