@@ -1,7 +1,8 @@
 <template>
   <div align="center" class="track">
     You are
-    <span v-if="distance > 0"
+    <span
+      v-if="distance > 0"
       class="blinker"
       style="background-color: #00000055; border-radius: 3px; padding: 5px; color: #F00; font-size: 1rem; font-weight: bold;"
     >{{distance}} KM</span> away from nearest confirmed case
@@ -15,20 +16,26 @@ module.exports = {
     return {
       latitude: 0,
       longitude: 0,
-      distance: 0,
-      isGPSOn: false
+      distance: 0
     };
   },
   mounted() {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(this.currentPosition, function() {
-          alert("Please Enable Location Services(GPS)")
-      });
-    } else {
-      console.log("Geo-Location is not supported by your browser");
-    }
+    this.updatePosition();
+    setInterval(this.updatePosition, 10000);
   },
   methods: {
+    updatePosition: function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          this.currentPosition,
+          function() {
+            alert("Please Enable Location Services(GPS)");
+          }
+        );
+      } else {
+        console.log("Geo-Location is not supported by your browser");
+      }
+    },
     currentPosition: function(position) {
       var vm = this;
 
@@ -70,7 +77,7 @@ module.exports = {
     opacity: 1;
   }
   75% {
-      opacity: 0.8;
+    opacity: 0.8;
   }
   to {
     opacity: 0;
