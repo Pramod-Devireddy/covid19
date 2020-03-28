@@ -21,7 +21,7 @@ module.exports = {
   },
   mounted() {
     this.updatePosition();
-    setInterval(this.updatePosition, 10000);
+    setInterval(this.updatePosition, 20000);
   },
   methods: {
     updatePosition: function() {
@@ -29,6 +29,7 @@ module.exports = {
         navigator.geolocation.getCurrentPosition(
           this.currentPosition,
           function() {
+            vm.distance = "";
             alert("Please Enable Location Services(GPS)");
           }
         );
