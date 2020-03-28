@@ -48,6 +48,8 @@ Copyright (c)2020 - Pramod Devireddy
 
             <covirus></covirus>
 
+            <tracker></tracker>
+
             <div align="center" class="mobileFirst">
                 <india></india>
             </div>
@@ -81,7 +83,7 @@ Copyright (c)2020 - Pramod Devireddy
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/http-vue-loader"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>

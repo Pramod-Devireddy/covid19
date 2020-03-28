@@ -65,8 +65,8 @@ html,
   position: relative;
   /* width: 615px;
   height: 700px; */
-  margin: auto;
-  margin-top: 60px;
+  margin: 0 auto;
+  /* margin-top: 60px; */
 }
 
 .counter {
@@ -80,8 +80,7 @@ html,
     position: relative !important;
     /* width: 350px;
     height: 400px; */
-    margin: auto;
-    margin-top: 50px;
+    margin: 0 auto;
   }
 
   .itemText {

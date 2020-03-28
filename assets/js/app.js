@@ -11,6 +11,7 @@
  */
 const india = httpVueLoader("assets/js/india.vue");
 const covirus = httpVueLoader("assets/js/covirus.vue");
+const tracker = httpVueLoader("assets/js/tracker.vue");
 
 new Vue({
   el: "#app",
@@ -22,48 +23,13 @@ new Vue({
   },
   components: {
     india: india,
-    covirus: covirus
+    covirus: covirus,
+    tracker: tracker
   },
   created: function() {
-    // this.updateHits();
-
-    // setInterval(this.updateHits, 10000);
-
-    // setTimeout(this.updateTempHits(), 30000);
+    
   },
   methods: {
-    updateHits: function() {
-      var vm = this;
-
-      var app1 = "https://covid-19ind.herokuapp.com/";
-      var app2 = "https://pramod-devireddy.github.io/covid19";
-
-      var query1 = "?url=" + encodeURIComponent(app1);
-      var query2 = "?url=" + encodeURIComponent(app2);
-
-      axios
-        .get("https://hitcounter.pythonanywhere.com/nocount" + query1)
-        .then(function(response) {
-          vm.app1Hits = response.data;
-
-          axios
-            .get("https://hitcounter.pythonanywhere.com/nocount" + query2)
-            .then(function(response) {
-              vm.app2Hits = response.data;
-
-              vm.totalHits = vm.app1Hits + vm.app2Hits;
-            })
-            .catch(function(error) {
-              console.log(error);
-            });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-
-    updateTempHits: function() {
-      window.location.reload(true);
-    }
+    
   }
 });
