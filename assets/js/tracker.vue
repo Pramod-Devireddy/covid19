@@ -25,10 +25,12 @@ module.exports = {
   },
   methods: {
     updatePosition: function() {
+      var vm = this;
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           this.currentPosition,
           function() {
+            vm.distance = 0;
             alert("Please Enable Location Services(GPS)");
           }
         );
