@@ -1,11 +1,17 @@
 <template>
   <div align="center" class="track">
-    You are
     <span
-      v-if="distance > 0"
+      v-if="isGPSEnabled == false"
       class="blinker"
-      style="background-color: #00000055; border-radius: 3px; padding: 5px; color: #F00; font-size: 1rem; font-weight: bold;"
-    >{{distance}} KM</span> away from nearest confirmed case
+      style="background-color: #00000055; border-radius: 3px; padding: 5px; color: #F00; font-size: 0.8rem;"
+    >Please Enable GPS to get the distance from nearest confirmed case</span>
+    <span v-if="isGPSEnabled">
+      You are
+      <span
+        class="blinker"
+        style="background-color: #00000055; border-radius: 3px; padding: 5px; color: #F00; font-size: 1rem; font-weight: bold;"
+      >{{distance}} KM</span> away from nearest confirmed case
+    </span>
   </div>
 </template>
 
@@ -16,12 +22,13 @@ module.exports = {
     return {
       latitude: 0,
       longitude: 0,
-      distance: 0
+      distance: 0,
+      isGPSEnabled: false
     };
   },
   mounted() {
     this.updatePosition();
-    setInterval(this.updatePosition, 20000);
+    setInterval(this.currentPosition, 30000);
   },
   methods: {
     updatePosition: function() {
@@ -30,7 +37,7 @@ module.exports = {
         navigator.geolocation.getCurrentPosition(
           this.currentPosition,
           function() {
-            vm.distance = 0;
+            vm.isGPSEnabled = false;
             alert("Please Enable Location Services(GPS)");
           }
         );
@@ -41,6 +48,7 @@ module.exports = {
     currentPosition: function(position) {
       var vm = this;
 
+      vm.isGPSEnabled = true;
       vm.latitude = position.coords.latitude;
       vm.longitude = position.coords.longitude;
 
