@@ -22,13 +22,13 @@ module.exports = {
     return {
       latitude: 0,
       longitude: 0,
-      distance: 0,
+      distance: "",
       isGPSEnabled: false
     };
   },
   mounted() {
     this.updatePosition();
-    setInterval(this.currentPosition, 30000);
+    setInterval(this.updatePosition, 15000);
   },
   methods: {
     updatePosition: function() {
