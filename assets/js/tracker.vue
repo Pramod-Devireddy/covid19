@@ -22,7 +22,7 @@ module.exports = {
     return {
       latitude: 0,
       longitude: 0,
-      distance: "",
+      distance: "...",
       isGPSEnabled: false
     };
   },
