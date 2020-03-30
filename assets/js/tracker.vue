@@ -28,7 +28,7 @@ module.exports = {
   },
   mounted() {
     this.updatePosition();
-    setInterval(this.updatePosition, 15000);
+    setInterval(this.updatePosition, 10000);
   },
   methods: {
     updatePosition: function() {
@@ -38,7 +38,6 @@ module.exports = {
           this.currentPosition,
           function() {
             vm.isGPSEnabled = false;
-            alert("Please Enable Location Services(GPS)");
           }
         );
       } else {
