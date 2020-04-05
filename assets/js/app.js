@@ -9,7 +9,7 @@
  *
  * Copyright (c)2020 - Pramod Devireddy
  */
-const india = httpVueLoader("assets/js/india.vue?v=19");
+const india = httpVueLoader("assets/js/india.vue?v=20");
 const covirus = httpVueLoader("assets/js/covirus.vue");
 const tracker = httpVueLoader("assets/js/tracker.vue");
 

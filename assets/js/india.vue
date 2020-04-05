@@ -25,7 +25,7 @@
         <span class="tiny itemText">/{{totalConfirmed}}</span>
       </span>
 
-      <span class="itemText" style="background-color: #9C2929; border-radius: 3px; padding: 5px; margin-right: 5px;">
+      <span class="itemText" style="background-color: #9C2929; border-radius: 3px; padding: 5px;">
         DEATHS:&nbsp;
         <span class="itemText" style="font-weight: bold;">{{totalDeaths}}</span>
         <span v-if="totalDeltaDeaths > 0" class="itemText">[&#8593;{{totalDeltaDeaths}}]</span>
