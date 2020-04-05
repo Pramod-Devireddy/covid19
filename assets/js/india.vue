@@ -209,17 +209,17 @@ module.exports = {
           for (var i = 0; i < vm.totalData.statewise.length; i++) {
             if (vm.totalData.statewise[i].state == "Total") {
               vm.totalActive = vm.totalData.statewise[i].active;
-              vm.totalDeltaActive = vm.totalData.statewise[i].delta.active;
+              vm.totalDeltaActive = vm.totalData.statewise[i].deltaconfirmed;
               vm.totalConfirmed = vm.totalData.statewise[i].confirmed;
 
               vm.totalDeaths = vm.totalData.statewise[i].deaths;
-              vm.totalDeltaDeaths = vm.totalData.statewise[i].delta.deaths;
+              vm.totalDeltaDeaths = vm.totalData.statewise[i].deltadeaths;
               vm.mortalityRate =
                 ((vm.totalDeaths / vm.totalConfirmed) * 100).toFixed(2) + "%";
 
               vm.totalRecovered = vm.totalData.statewise[i].recovered;
               vm.totalDeltaRecovered =
-                vm.totalData.statewise[i].delta.recovered;
+                vm.totalData.statewise[i].deltarecovered;
               vm.recoveryRate =
                 ((vm.totalRecovered / vm.totalConfirmed) * 100).toFixed(2) +
                 "%";
@@ -240,16 +240,16 @@ module.exports = {
       for (var i = 0; i < vm.totalData.statewise.length; i++) {
         if (vm.totalData.statewise[i].state == vm.selectedState) {
           vm.selStateActive = vm.totalData.statewise[i].active;
-          vm.selStateDeltaActive = vm.totalData.statewise[i].delta.active;
+          vm.selStateDeltaActive = vm.totalData.statewise[i].deltaconfirmed;
           vm.selStateConfirmed = vm.totalData.statewise[i].confirmed;
 
           vm.selStateDeaths = vm.totalData.statewise[i].deaths;
-          vm.selStateDeltaDeaths = vm.totalData.statewise[i].delta.deaths;
+          vm.selStateDeltaDeaths = vm.totalData.statewise[i].deltadeaths;
           vm.selStateMortalityRate =
             ((vm.selStateDeaths / vm.selStateConfirmed) * 100).toFixed(2) + "%";
 
           vm.selStateRecovered = vm.totalData.statewise[i].recovered;
-          vm.selStateDeltaRecovered = vm.totalData.statewise[i].delta.recovered;
+          vm.selStateDeltaRecovered = vm.totalData.statewise[i].deltarecovered;
           vm.selStateRecoveryRate =
             ((vm.selStateRecovered / vm.selStateConfirmed) * 100).toFixed(2) +
             "%";
