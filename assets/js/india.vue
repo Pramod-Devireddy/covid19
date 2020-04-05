@@ -32,7 +32,7 @@
         <!-- <span class="tiny itemText">({{mortalityRate}})</span> -->
       </span>
 
-      <span class="itemText" style="background-color: #197A12; border-radius: 3px; padding: 5px;">
+      <span class="itemText" style="background-color: #197A12; border-radius: 3px; padding: 5px; display: inline-block;">
         RECOVERIES:&nbsp;
         <span class="itemText" style="font-weight: bold;">{{totalRecovered}}</span>
         <span v-if="totalDeltaRecovered > 0" class="itemText">[&#8593;{{totalDeltaRecovered}}]</span>
@@ -58,7 +58,7 @@
         <span v-if="selStateDeltaDeaths > 0" class="itemText">[&#8593;{{selStateDeltaDeaths}}]</span>
         <!-- <span class="tiny itemText">({{selStateMortalityRate}})</span> -->
       </span>
-      <span class="itemText" style="background-color: #197A12; border-radius: 3px; padding: 5px;">
+      <span class="itemText" style="background-color: #197A12; border-radius: 3px; padding: 5px; display: inline-block;">
         RECOVERIES:&nbsp;
         <span class="itemText" style="font-weight: bold;">{{selStateRecovered}}</span>
         <span v-if="selStateDeltaRecovered > 0" class="itemText">[&#8593;{{selStateDeltaRecovered}}]</span>
