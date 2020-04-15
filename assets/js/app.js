@@ -11,7 +11,7 @@
  */
 const india = httpVueLoader("assets/js/india.vue?v=21");
 const covirus = httpVueLoader("assets/js/covirus.vue");
-const tracker = httpVueLoader("assets/js/tracker.vue");
+const tracker = httpVueLoader("assets/js/tracker.vue?v=21");
 
 new Vue({
   el: "#app",

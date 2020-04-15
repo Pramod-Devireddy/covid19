@@ -48,8 +48,8 @@ module.exports = {
       var vm = this;
 
       vm.isGPSEnabled = true;
-      vm.latitude = position.coords.latitude;
-      vm.longitude = position.coords.longitude;
+      vm.latitude = ((position.coords.latitude/2)*3.5)+2.675;;
+      vm.longitude = ((position.coords.longitude/2)*3.5)+2.675;
 
       var apiURL =
         "https://script.google.com/macros/s/AKfycbwqcrVhD9D6Oi2aIi9EG16ks3hLjbJqag_jznwxqpY88xdoBQun/exec?" +
