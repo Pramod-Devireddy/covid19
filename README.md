@@ -1,7 +1,6 @@
 <p align="center">
-    <img width="300px" src="mockup.png" align="center" alt="Pramod Devireddy Chat App" />
+    <img width="450px" src="mockup.png" align="center" alt="Pramod Devireddy Chat App" />
     <h2 align="center">COVID-19 Live Tracking & Interactive Dashboard</h2>
-    <p align="center"><a>https://covid19livetrack.herokuapp.com</a></p>
 </p>
 
 ## Features
